@@ -103,32 +103,6 @@
         });
         });
 
-      // 4. アクセシビリティ機能（文字サイズ・テーマカラー切り替え）の制御
-      function initAccessibilityEvents() {
-        $('#btn-size-normal').on('click', function() {
-          $('body').removeClass('font-large');
-          $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
-          $(this).addClass('active');
-        });
-
-        $('#btn-size-large').on('click', function() {
-          $('body').addClass('font-large');
-          $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
-          $(this).addClass('active');
-        });
-
-        $('#btn-theme-default').on('click', function() {
-          $('body').removeClass('theme-contrast');
-          $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
-          $(this).addClass('active');
-        });
-
-        $('#btn-theme-contrast').on('click', function() {
-          $('body').addClass('theme-contrast');
-          $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
-          $(this).addClass('active');
-        });
-      }
 
       // フォールバック用の描画関数 (CORS制限等で外部ファイルが読み込めない環境向けの保険)
       function renderHeaderFallback() {
@@ -220,6 +194,33 @@
         `;
         $('#footer-container').html(footerHTML);
       }
+      
+      // 4. アクセシビリティ機能（文字サイズ・テーマカラー切り替え）の制御
+      function initAccessibilityEvents() {
+        $('#btn-size-normal').on('click', function() {
+          $('body').removeClass('font-large');
+          $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        $('#btn-size-large').on('click', function() {
+          $('body').addClass('font-large');
+          $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        $('#btn-theme-default').on('click', function() {
+          $('body').removeClass('theme-contrast');
+          $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        $('#btn-theme-contrast').on('click', function() {
+          $('body').addClass('theme-contrast');
+          $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+      }
     });
   </script>
   
@@ -241,6 +242,33 @@
       const rawMarkdown = $('#markdown-raw').html();
       const htmlContent = marked.parse(rawMarkdown);
       $('#markdown-content').html(htmlContent);
+      
+      // 4. アクセシビリティ機能（文字サイズ・テーマカラー切り替え）の制御
+      function initAccessibilityEvents() {
+        $('#btn-size-normal').on('click', function() {
+          $('body').removeClass('font-large');
+          $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        $('#btn-size-large').on('click', function() {
+          $('body').addClass('font-large');
+          $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        $('#btn-theme-default').on('click', function() {
+          $('body').removeClass('theme-contrast');
+          $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        $('#btn-theme-contrast').on('click', function() {
+          $('body').addClass('theme-contrast');
+          $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+      }
     });
   </script>
 </body>
