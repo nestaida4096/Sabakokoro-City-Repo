@@ -8,6 +8,9 @@
   <!-- jQueryの読み込み -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+  <!-- MarkdownをHTMLに解析・変換する「marked.js」の読み込み -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   <!-- スタイルシート -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -41,6 +44,21 @@
         </ul>
       </section>
     </div>
+      <article class="markdown-container">
+        <!-- 
+          ここにMarkdownテキストを直接記述（ハードコード）します。
+          「textarea」または「script(type="text/markdown")」内に書くことで、
+          余計な改行やブラウザによる自動レンダリングを防ぎ、そのままmarked.jsに渡せます。
+        -->
+        <script type="text/markdown" id="markdown-raw">
+## 鯖心特別市
+- MTTSのスポーン地点であり、中央地点に位置する特別市。
+- 未来的な都市計画と高度なテクノロジーが融合した都市で、住民の生活の質を高めるための様々な施策が展開されています。
+        </script>
+
+        <!-- MarkdownがHTMLに変換されて描画される実際のコンテナ -->
+        <div id="markdown-content" class="markdown-body"></div>
+      </article>
   </main>
 
   <!-- フッター挿入エリア -->
@@ -204,6 +222,27 @@
         `;
         $('#footer-container').html(footerHTML);
       }
+    });
+  </script>
+  
+  <!-- スクリプト制御 -->
+  <script>
+    $(document).ready(function() {
+      // 1. パスのルート指定（GitHub Pages等の展開先にあわせて相対的に自動決定）
+      const basePath = "https://nestaida.github.io/Sabakokoro-City-Repo/";
+
+      // 2. ヘッダーとフッターのロード（jQuery）
+      $('#header-container').load(basePath + 'header.html', function(response, status) {
+        if (status !== "error") {
+          initAccessibilityEvents();
+        }
+      });
+      $('#footer-container').load(basePath + 'footer.html');
+
+      // 3. ハードコードされたMarkdownを取得し、marked.js で解析して描画
+      const rawMarkdown = $('#markdown-raw').html();
+      const htmlContent = marked.parse(rawMarkdown);
+      $('#markdown-content').html(htmlContent);
     });
   </script>
 </body>

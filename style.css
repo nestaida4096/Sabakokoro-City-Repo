@@ -367,3 +367,106 @@
         gap: 5px;
       }
     }
+
+    
+    /* ==========================================================================
+       3. メインレイアウト & マークダウン装飾
+       ========================================================================== */
+    .main-wrapper {
+      flex: 1;
+      padding: 40px 0;
+    }
+    .markdown-container {
+      background-color: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 40px;
+    }
+    body.theme-contrast .markdown-container {
+      background-color: #000000;
+      border-color: #ffffff;
+    }
+
+    /* 変換後の見栄えを整えるマークダウン専用CSS */
+    .markdown-body h1 {
+      font-size: 2em;
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    body.theme-contrast .markdown-body h1 {
+      color: #ffffff;
+      border-bottom-color: #ffffff;
+    }
+    .markdown-body h2 {
+      font-size: 1.5em;
+      color: var(--primary-color);
+      border-left: 5px solid var(--primary-color);
+      padding-left: 12px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    body.theme-contrast .markdown-body h2 {
+      color: #ffffff;
+      border-left-color: #ffffff;
+    }
+    .markdown-body h3 {
+      font-size: 1.2em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 15px;
+    }
+    .markdown-body h3::before {
+      content: "■";
+      color: var(--secondary-color);
+      position: absolute;
+      left: 0;
+    }
+    .markdown-body p {
+      margin-bottom: 20px;
+    }
+    .markdown-body ul, .markdown-body ol {
+      margin-bottom: 25px;
+      padding-left: 25px;
+    }
+    .markdown-body li {
+      margin-bottom: 8px;
+    }
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+    .markdown-body th, .markdown-body td {
+      border: 1px solid var(--border-color);
+      padding: 12px;
+      text-align: left;
+    }
+    .markdown-body th {
+      background-color: var(--bg-color-light);
+      font-weight: bold;
+    }
+    body.theme-contrast .markdown-body th {
+      background-color: #222222;
+    }
+    .markdown-body blockquote {
+      border-left: 4px solid var(--secondary-color);
+      padding: 15px 20px;
+      background-color: var(--bg-color-light);
+      margin-bottom: 25px;
+      color: var(--text-color-light);
+    }
+    body.theme-contrast .markdown-body blockquote {
+      background-color: #111111;
+      border-left-color: #ffffff;
+      color: #ffffff;
+    }
+    .markdown-body strong {
+      color: #e53e3e;
+    }
+    body.theme-contrast .markdown-body strong {
+      color: #ffff00;
+    }
