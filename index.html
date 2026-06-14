@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鯖心特別市｜Sabakokoro City</title>
+  
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+  <!-- スタイルシート -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ヘッダー挿入エリア -->
+  <div id="header-container"></div>
+
+  <!-- メインコンテンツ -->
+  <main class="main-wrapper" id="main-content">
+    <div class="container">
+      <section class="news-section">
+        <h2 class="section-title">重要なお知らせ</h2>
+        <ul class="news-list">
+          <li class="news-item">
+            <span class="news-date">2026年06月14日</span>
+            <span class="news-category" style="background-color: #8d7c1a;">安心・安全</span>
+            <a href="https://nestaida.github.io/Sabakokoro-City-Repo/important_news/2026-06-14.html" class="news-title">【注意喚起】「加山帝国」への立入について</a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="news-section">
+        <h2 class="section-title">市役所からのお知らせ</h2>
+        <ul class="news-list">
+          <li class="news-item">
+            <span class="news-date">2026年06月14日</span>
+            <span class="news-category">その他</span>
+            <a href="https://nestaida.github.io/Sabakokoro-City-Repo/posts/20260614.html" class="news-title">隣の行政である「加山帝国」内の制度に関する懸念の表明</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <!-- フッター挿入エリア -->
+  <div id="footer-container"></div>
+
+  <!-- jQueryを使用した結合・アクション制御 -->
+  <script>
+    $(document).ready(function() {
+      // 1. ヘッダーとフッターの非同期結合
+      // ローカルでの直接プレビュー時にCORS制約に引っかかる可能性があるため、
+      // 成功した場合とエラー時の代替処理（プレビュー用）を用意しています。
+      
+      $('#header-container').load('header.html', function(response, status, xhr) {
+        if (status === "error") {
+          console.warn("ヘッダーのローカル読み込みに失敗しました。サーバー上で起動するか、下記代替JSをトリガーしてください。");
+          // 代替として、HTMLファイルが存在しない場合の動的プレビューフォールバックをセット
+          renderHeaderFallback();
+        } else {
+          // 正常にロードされた後、ボタンイベントを初期化
+          initAccessibilityEvents();
+        }
+      });
+
+      $('#footer-container').load('footer.html', function(response, status, xhr) {
+        if (status === "error") {
+          console.warn("フッターのローカル読み込みに失敗しました。");
+          renderFooterFallback();
+        }
+      });
+
+      // 各ページの読み込みスクリプト例
+        const basePath = "https://nestaida.github.io/Sabakokoro-City-Repo/";
+
+        $('#header-container').load(basePath + 'header.html', function() {
+        // 読み込み完了後、リンク先をベースパスに合わせて補正する
+        $(this).find('[data-link-type="home"]').attr('href', basePath + 'index.html');
+        
+        // ナビゲーション等も同様に補正可能
+        $(this).find('[data-link-type="nav"]').each(function() {
+            const currentHref = $(this).attr('href');
+            // すでに設定されている相対パスをbasePath基準に書き換える処理など
+        });
+        });
+
+      // 2. アクセシビリティ制御（フォントサイズ変更、白黒反転）
+      function initAccessibilityEvents() {
+        // 文字サイズ変更
+        $('#btn-size-normal').on('click', function() {
+          $('body').removeClass('font-large');
+          $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        $('#btn-size-large').on('click', function() {
+          $('body').addClass('font-large');
+          $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        // テーマ配色変更
+        $('#btn-theme-default').on('click', function() {
+          $('body').removeClass('theme-contrast');
+          $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+
+        $('#btn-theme-contrast').on('click', function() {
+          $('body').addClass('theme-contrast');
+          $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
+          $(this).addClass('active');
+        });
+      }
+
+      // フォールバック用の描画関数 (CORS制限等で外部ファイルが読み込めない環境向けの保険)
+      function renderHeaderFallback() {
+        const headerHTML = `
+          <header class="gov-header">
+            <div class="accessibility-bar">
+              <div class="container flex-container">
+                <div class="accessibility-controls">
+                  <span class="control-label">文字サイズ:</span>
+                  <button id="btn-size-normal" class="btn-control active">標準</button>
+                  <button id="btn-size-large" class="btn-control">拡大</button>
+                </div>
+                <div class="accessibility-controls">
+                  <span class="control-label">配色:</span>
+                  <button id="btn-theme-default" class="btn-control active">標準</button>
+                  <button id="btn-theme-contrast" class="btn-control">白黒反転</button>
+                </div>
+              </div>
+            </div>
+            <div class="main-header">
+              <div class="container flex-container">
+                <div class="logo-area">
+                  <a href="index.html" class="logo-link">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5l7.5 13H4.5L12 5.5z"/></svg>
+                    <div class="logo-text">
+                      <span class="main-title">鯖心特別市役所</span>
+                      <span class="sub-title">Mirai City Government (Fallback)</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="search-area">
+                  <div class="search-form">
+                    <input type="search" placeholder="キーワードを入力" class="search-input">
+                    <button class="search-submit">検索</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <nav class="global-nav">
+              <div class="container">
+                <ul class="nav-list">
+                  <li><a href="#" class="nav-item">くらし・手続き</a></li>
+                  <li><a href="#" class="nav-item">健康・福祉・子育て</a></li>
+                  <li><a href="#" class="nav-item">観光・魅力</a></li>
+                  <li><a href="#" class="nav-item">産業・ビジネス</a></li>
+                  <li><a href="#" class="nav-item">市政情報</a></li>
+                </ul>
+              </div>
+            </nav>
+          </header>
+        `;
+        $('#header-container').html(headerHTML);
+        initAccessibilityEvents();
+      }
+
+      function renderFooterFallback() {
+        const footerHTML = `
+          <footer class="gov-footer">
+            <div class="container footer-content">
+              <div class="footer-info">
+                <div class="footer-logo">
+                  <span class="footer-title">鯖心特別市役所</span>
+                  <p class="footer-address">〒000-0000 未来県鯖心特別市希望が丘1丁目1番1号</p>
+                  <p class="footer-phone">電話番号：0120-000-000（代表）</p>
+                </div>
+              </div>
+              <div class="footer-links-grid">
+                <div class="links-column">
+                  <h3 class="column-title">サイトの利用案内</h3>
+                  <ul>
+                    <li><a href="#">個人情報の取り扱い</a></li>
+                    <li><a href="#">ウェブアクセシビリティについて</a></li>
+                  </ul>
+                </div>
+                <div class="links-column">
+                  <h3 class="column-title">関連サイト</h3>
+                  <ul>
+                    <li><a href="#">鯖心特別市議会</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <div class="container">
+                <p class="copyright">Copyright &copy; Mirai City. All Rights Reserved.</p>
+              </div>
+            </div>
+          </footer>
+        `;
+        $('#footer-container').html(footerHTML);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!-- 
+  header.html: 行政ホームページ用のヘッダーコンポーネント
+  ※このファイルは単体で他のページにjQuery等を使って読み込まれることを想定しています。
+  ※GitHub Pagesなどのサブディレクトリ（例: /repository-name/）でも動作するよう、
+    基本リンクは「./」から始まる相対パスで記述しています。
+-->
+<header class="gov-header">
+  <!-- アクセシビリティ・ツールバー -->
+  <div class="accessibility-bar">
+    <div class="container flex-container">
+      <div class="accessibility-controls">
+        <span class="control-label">文字サイズ:</span>
+        <button id="btn-size-normal" class="btn-control active" aria-label="文字サイズを標準にする">標準</button>
+        <button id="btn-size-large" class="btn-control" aria-label="文字サイズを大きくする">拡大</button>
+      </div>
+      <div class="accessibility-controls">
+        <span class="control-label">配色:</span>
+        <button id="btn-theme-default" class="btn-control active" aria-label="標準の配色にする">標準</button>
+        <button id="btn-theme-contrast" class="btn-control" aria-label="高コントラストの配色にする">白黒反転</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- メインヘッダーエリア -->
+  <div class="main-header">
+    <div class="container flex-container">
+      <!-- ロゴと組織名 -->
+      <div class="logo-area">
+        <!-- 
+          GitHub Pages対応: 
+          多階層ページから呼ばれる場合は、読み込み側のjQueryで「data-href-base」を元にパスを自動調整できます。
+        -->
+        <a href="https://nestaida.github.io/Sabakokoro-City-Repo/index.html" class="logo-link" data-link-type="home">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L1 21h22L12 2zm0 3.5l7.5 13H4.5L12 5.5z"/>
+          </svg>
+          <div class="logo-text">
+            <span class="main-title">鯖心特別市</span>
+            <span class="sub-title">Sabakokoro City</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- サイト内検索 -->
+      <div class="search-area">
+        <form action="#" method="get" class="search-form" role="search">
+          <input type="search" placeholder="キーワードを入力" class="search-input" aria-label="サイト内検索">
+          <button type="submit" class="search-submit" aria-label="検索を実行">検索</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- グローバルナビゲーション -->
+  <nav class="global-nav" aria-label="メインナビゲーション">
+    <div class="container">
+      <ul class="nav-list">
+        <!-- 各ナビゲーションリンクにも相対パスを設定可能にしています -->
+        <li><a href="https://nestaida.github.io/Sabakokoro-City-Repo/kurashi/index.html" class="nav-item" data-link-type="nav">くらし・手続き</a></li>
+        <li><a href="https://nestaida.github.io/Sabakokoro-City-Repo/kenko/index.html" class="nav-item" data-link-type="nav">健康・福祉・子育て</a></li>
+        <li><a href="https://nestaida.github.io/Sabakokoro-City-Repo/kanko/index.html" class="nav-item" data-link-type="nav">観光・魅力</a></li>
+        <li><a href="https://nestaida.github.io/Sabakokoro-City-Repo/sangyo/index.html" class="nav-item" data-link-type="nav">産業・ビジネス</a></li>
+        <li><a href="https://nestaida.github.io/Sabakokoro-City-Repo/shisei/index.html" class="nav-item" data-link-type="nav">市政情報</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
