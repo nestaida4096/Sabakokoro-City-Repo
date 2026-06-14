@@ -102,9 +102,8 @@
         });
         });
 
-      // 2. アクセシビリティ制御（フォントサイズ変更、白黒反転）
+      // 4. アクセシビリティ機能（文字サイズ・テーマカラー切り替え）の制御
       function initAccessibilityEvents() {
-        // 文字サイズ変更
         $('#btn-size-normal').on('click', function() {
           $('body').removeClass('font-large');
           $('.accessibility-controls:nth-child(1) .btn-control').removeClass('active');
@@ -117,7 +116,6 @@
           $(this).addClass('active');
         });
 
-        // テーマ配色変更
         $('#btn-theme-default').on('click', function() {
           $('body').removeClass('theme-contrast');
           $('.accessibility-controls:nth-child(2) .btn-control').removeClass('active');
